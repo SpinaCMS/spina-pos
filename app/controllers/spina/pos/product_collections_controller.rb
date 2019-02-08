@@ -4,6 +4,7 @@ module Spina
 
       def index
         @product_collections = Shop::ProductCollection.all
+        @product_categories = Shop::ProductCategory.order(:name)
       end
 
       def show

@@ -12,20 +12,21 @@
         = link_to 'In winkelmand', add_product_orders_path(product_id: @product.id), class: 'button button-block', data: {remote: true, method: :post}
 
       - @product.variants.each do |variant|
-        = link_to variant.variant_name, add_product_orders_path(product_id: variant.id), class: 'button button-block', data: {remote: true, method: :post}
-        %br/
+        = link_to variant.variant_name || "(geen naam ingesteld)", add_product_orders_path(product_id: variant.id), class: 'button', style: "margin: 5px", data: {remote: true, method: :post}
 
-    %table
+    %table{style: 'width: 100%'}
       %tr
-        %th Voorraad
+        %th{width: 200} Voorraad
         %td= @product.stock_level
         
       %tr
-        %th Locatie
+        %th{width: 200} Locatie
         %td= @product.location
 
-      - if @product.properties.present? && @product.properties != "{}"
-        - @product.properties.each do |property|
-          %tr
-            %th= property[0]
-            %td= property[1]
+    %table{style: 'width: 100%'}
+      - if @product.product_category.present?
+        - @product.product_category.product_properties.order(:label).each do |property|
+          - if @product.properties[property.name].present?
+            %tr
+              %th{width: 200}= property.label
+              %td= render partial: 'property', locals: {product: @product, property: property}

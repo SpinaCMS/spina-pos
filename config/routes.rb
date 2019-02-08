@@ -25,6 +25,7 @@ Spina::Pos::Engine.routes.draw do
     end
   end
 
+  resources :product_categories, only: [:show]
   resources :product_collections, only: [:index, :show]
   resources :product_bundles
 

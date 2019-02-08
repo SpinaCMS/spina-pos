@@ -4,7 +4,16 @@
   .product
     = link_to products_path do
       .product-name Alle producten
-      
+%br/
+.product-overview
+  - @product_categories.each do |product_category|
+    .product
+      = link_to product_category do
+        .product-name
+          = image_tag "#{product_category.icon}.svg", height: 50
+          = product_category.name
+%br/
+.product-overview
   - @product_collections.each do |product_collection|
     .product
       = link_to product_collection do

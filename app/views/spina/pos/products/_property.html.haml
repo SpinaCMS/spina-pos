@@ -1,0 +1,12 @@
+- case property.field_type
+- when "select"
+  - if property.multiple
+    - options = property.property_options.where(name: product.properties[property.name])
+    = options&.map(&:label).join(', ')
+  - else
+    - option = property.property_options.find_by(name: product.properties[property.name])
+    = option&.label
+- when "checkbox"
+  = product.properties[property.name] == "1" ? "Ja" : "Nee"
+- else
+  = product.properties[property.name]

@@ -3,7 +3,7 @@ module Spina
     class ProductsController < PosController
 
       def index
-        @products = Shop::Product.active.roots.includes(:product_images).page(params[:page]).per(20)
+        @products = Shop::Product.active.roots.includes(:product_images).order(created_at: :desc).page(params[:page]).per(20)
         @products = @products.search(params[:search]) if params[:search].present?
       end
 
