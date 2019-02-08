@@ -1,0 +1,36 @@
+- content_for(:title) { "Contant" }
+
+= form_tag confirm_checkout_index_path, id: 'checkout_payment_form', data: {remote: true} do
+  = hidden_field_tag :payment_received
+  .cash-keypad
+    .cash-keypad-output
+      .cash-keypad-label te betalen
+      .cash-keypad-treshold{data: {keypad_treshold: @order.to_be_paid_round}}= number_to_currency @order.to_be_paid_round
+      .cash-keypad-label ontvangen
+      .cash-keypad-symbol €
+      .cash-keypad-price.text-muted{data: {keypad_value: 0}} 0,00
+
+    .cash-keypad-input
+      .cash-keypad-input-row
+        .cash-keypad-input-button{data: {keypad_input_exact_value: "10"}} €10
+        .cash-keypad-input-button{data: {keypad_input_value: "7"}} 7
+        .cash-keypad-input-button{data: {keypad_input_value: "8"}} 8
+        .cash-keypad-input-button{data: {keypad_input_value: "9"}} 9
+      .cash-keypad-input-row
+        .cash-keypad-input-button{data: {keypad_input_exact_value: 20}} €20
+        .cash-keypad-input-button{data: {keypad_input_value: "4"}} 4
+        .cash-keypad-input-button{data: {keypad_input_value: "5"}} 5
+        .cash-keypad-input-button{data: {keypad_input_value: "6"}} 6
+      .cash-keypad-input-row
+        .cash-keypad-input-button{data: {keypad_input_exact_value: 50}} €50
+        .cash-keypad-input-button{data: {keypad_input_value: "1"}} 1
+        .cash-keypad-input-button{data: {keypad_input_value: "2"}} 2
+        .cash-keypad-input-button{data: {keypad_input_value: "3"}} 3
+      .cash-keypad-input-row
+        .cash-keypad-input-button{data: {keypad_input_exact_value: 100}} €100
+        .cash-keypad-input-button{data: {keypad_input_value: 'delete'}}
+          = image_tag 'spina/pos/delete@2x.png', width: 50, height: 50
+        .cash-keypad-input-button{data: {keypad_input_value: "0"}} 0
+        .cash-keypad-input-button{data: {keypad_input_value: "00"}} 00
+
+  = submit_tag 'Submit', style: 'display: none', data: {disable_with: 'Submitting'}

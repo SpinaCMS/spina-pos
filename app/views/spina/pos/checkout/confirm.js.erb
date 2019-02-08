@@ -1,0 +1,26 @@
+var printer = new Spina.PosPrinter("<%= pos_preferences.printer_ip %>", "<%= current_user.name %>");
+
+<% @order.order_items.each do |order_item| %>
+  printer.addOrderItem("<%= order_item.quantity %>", "<%=j order_item.description %>", "<%= number_to_currency(order_item.total) %>");
+<% end %>
+
+<% @order.tax_amount_by_rates.each do |rate| %>
+  printer.addTaxLine("<%= number_to_human(rate[0]) %>", "<%= number_to_currency(rate[1][:tax_amount]) %>");
+<% end %>
+
+printer.setTotals("<%= number_to_currency(@order.order_total) %>", "<%= number_to_currency(@order.total) %>");
+
+<% if @order.gift_card.present? %>
+  printer.addGiftCard("<%= number_to_currency(@order.gift_card_amount) %>", "<%= number_to_currency(@order.to_be_paid) %>")
+<% end %>
+
+printer.setOrderNumber("#<%= @order.number %>");
+printer.setReceivedAt("<%=l @order.received_at, format: "%d %B %Y %H:%M" %>");
+
+printer.setPaymentMethod("<%=j @order.payment_method %>");
+
+printer.print({openDrawer: <%= @order.payment_method == 'cash' %>});
+
+webkit.messageHandlers.spina.postMessage("finished");
+
+Turbolinks.visit("<%= finished_checkout_index_path(change: @change) %>");

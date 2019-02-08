@@ -1,0 +1,38 @@
+= form_for @order, data: {remote: true} do |f|
+  = f.fields_for :order_items, @order_items do |ff|
+    - unless ff.object.orderable == Spina::Shop::Product.find_by(sku: "statiegeld") || ff.object.orderable.nil?
+      .cart-order-item-container
+        .cart-order-item{data: {order_item_price: ff.object.unit_price, stock_level: ff.object.orderable.stock_level}}
+          %span.order-item-price{style: 'float: right'}
+            - if ff.object.discount_amount > 0
+              %div{style: 'text-decoration: line-through; opacity: .5'}= number_to_currency ff.object.total_without_discount
+              .text-green= number_to_currency ff.object.total
+            - else
+              = number_to_currency ff.object.total
+
+          .select-container
+            = ff.select :quantity, options_for_select((1..99).map{|i| ["#{i} &times;".html_safe, i]}, ff.object.quantity)
+          = ff.object.description
+          - if !ff.object.is_product_bundle? && ff.object.orderable.stock_enabled?
+            %div.not-in-stock-message{style: ('display: none' if ff.object.orderable.stock_level >= ff.object.quantity)} 
+              #{ff.object.orderable.stock_level} op voorraad
+
+        = link_to '#', class: 'delete-item', data: {delete_path: order_order_item_path(@order.id, ff.object.id)} do
+          = image_tag 'spina/pos/delete-pos.png', width: 24, height: 24
+
+  - if @order.gift_card.present?
+    .cart-order-item-container
+      .cart-order-item
+        %span.order-item-price{style: 'float: right'}
+          \-
+          = number_to_currency @order.gift_card_amount
+        Cadeaubon
+        = number_to_currency @order.gift_card.value
+      = link_to '#', class: 'delete-item', data: {delete_path: remove_gift_card_pos_orders_path} do
+        = image_tag 'spina/pos/delete-pos.png', width: 24, height: 24
+
+  - if @order.discount.present?
+    .cart-order-item-container
+      .cart-order-item= @order.discount.description
+      = link_to '#', class: 'delete-item', data: {delete_path: remove_discount_pos_orders_path} do
+        = image_tag 'spina/pos/delete-pos.png', width: 24, height: 24

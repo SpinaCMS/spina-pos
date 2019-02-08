@@ -1,0 +1,2 @@
+$("<%=j render partial: 'order', collection: @orders %>").appendTo(".order-overview ul");
+$('.order-pagination').html("<%= j link_to_next_page @orders, '', data: {remote: true} %>").infiniteScroll();

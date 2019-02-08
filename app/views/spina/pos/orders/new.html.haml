@@ -1,0 +1,12 @@
+- content_for(:title) { "Winkelmand" }
+
+.shopping-cart
+  = text_field_tag :hoi, nil, style: 'width: 0px; overflow: hidden; min-width: 0px; -webkit-transform: scale(0); position: absolute'
+
+  .scandieshit
+    = link_to '#', id: 'start_scanning', class: 'btn' do
+      = image_tag 'spina/pos/scannen.png', width: 141, height: 24
+
+    .siriwave#siriwave
+
+  #cart{style: 'padding-bottom: 50px'}= render partial: 'cart'

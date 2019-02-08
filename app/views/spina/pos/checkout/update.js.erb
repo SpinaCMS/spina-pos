@@ -1,0 +1,5 @@
+<% if @order.payment_method == 'cash' %>
+  Turbolinks.visit("<%= cash_payment_checkout_index_path %>");
+<% else %>
+  Turbolinks.visit("<%= pin_payment_checkout_index_path %>");
+<% end %>

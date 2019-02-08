@@ -1,0 +1,13 @@
+- content_for(:title) { "Cadeaubon" }
+
+= form_for @order, url: add_gift_card_pos_orders_path, method: :post, html: {id: 'order_gift_card_form'}, data: {remote: true} do |f|
+  = f.submit 'Save', style: 'display: none'
+
+  %div{style: 'margin-top: 40px'}
+
+  = label_tag :gift_card, 'Code', class: 'form-label'
+
+  .form-group
+    .form-input-message.form-input-message-error
+    = text_field_tag :gift_card, @order.gift_card.try(:readable_code), class: 'form-control', placeholder: "XXXX - XXXX"
+

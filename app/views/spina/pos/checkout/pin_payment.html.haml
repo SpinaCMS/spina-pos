@@ -1,0 +1,12 @@
+- content_for(:title) { "Pinbetaling" }
+
+.checkout
+  .checkout-container
+    = image_tag 'pos/pin@2x.png', style: 'margin: 20px 0', width: 92, height: 65
+
+    .checkout-label Stel nu de pinautomaat in
+    .checkout-total= number_to_currency @order.to_be_paid
+  
+= form_tag confirm_checkout_index_path, id: 'checkout_payment_form', data: {remote: true} do
+  = hidden_field_tag :payment_received, @order.to_be_paid
+  = submit_tag 'Submit', style: 'display: none', data: {disable_with: 'Submitting'}

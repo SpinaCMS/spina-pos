@@ -1,0 +1,16 @@
+- content_for(:title) { "Catalogus" }
+
+.product-overview
+  .product
+    = link_to products_path do
+      .product-name Alle producten
+      
+  - @product_collections.each do |product_collection|
+    .product
+      = link_to product_collection do
+        .product-name
+          = product_collection.name
+
+  .product
+    = link_to product_bundles_path do
+      .product-name Productbundels

@@ -1,0 +1,25 @@
+- content_for(:title) { "Kassabeheer" }
+
+%nav.list
+  %ul
+    %li
+      = link_to settings_orders_path do
+        = image_tag 'spina/pos/cart@2x.png', width: 24, height: 22
+        Vorige bestellingen
+
+    %li
+      = link_to settings_printer_path do
+        = image_tag 'spina/pos/printer@2x.png', width: 24, height: 24
+        Bonprinter
+
+    %li
+      - if current_shift.present?
+        = link_to edit_settings_shift_path(current_shift) do
+          = image_tag 'spina/pos/sunset@2x.png', width: 24, height: 24
+          Dag sluiten
+      - else
+        = link_to new_settings_shift_path do
+          = image_tag 'spina/pos/sunrise@2x.png', width: 24, height: 24
+          Dag openen
+
+.text-center{style: 'position: absolute; bottom: 10px; width: 100%'}= link_to 'Uitloggen', logout_path, class: 'button button-link', data: {turbolinks_action: 'replace'}

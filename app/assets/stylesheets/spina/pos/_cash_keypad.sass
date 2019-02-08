@@ -1,0 +1,78 @@
+.cash-keypad
+  height: 100%
+  width: 100%
+
+.cash-keypad-output
+  background: #fff
+  overflow: hidden
+  padding: 16px 40px 0 44px
+  width: 100%
+
+.cash-keypad-label
+  color: #aaa
+  font-size: 16px
+  font-weight: 600
+  line-height: 24px
+  text-align: right
+
+.cash-keypad-treshold
+  color: #333
+  font-size: 24px
+  font-weight: 500
+  margin-bottom: 24px
+  text-align: right
+
+.cash-keypad-symbol
+  color: #333
+  float: left
+  font-size: 64px
+  font-weight: 500
+  margin-top: -12px
+  line-height: 100px
+
+.cash-keypad-price
+  color: #333
+  font-size: 72px
+  font-variant-numeric: tabular-nums
+  font-weight: 500
+  line-height: 100px
+  margin-right: -2px
+  margin-top: -12px
+  text-align: right
+  white-space: nowrap
+
+  &.text-muted
+    color: #ccc
+
+.cash-keypad-input
+  display: flex
+  flex-direction: column
+
+.cash-keypad-input-row
+  border-bottom: 1px solid #e5e5ee
+  display: flex
+  flex: 1
+
+.cash-keypad-input-button
+  align-items: center
+  border-right: 1px solid #e5e5ee
+  color: #4a4b50
+  display: flex
+  font-size: 38px
+  font-weight: 500
+  height: 92px
+  flex: 1
+  justify-content: center
+
+  &:active
+    background: #e5e5ee
+
+  &:last-child
+    border-right: none
+
+  &[data-keypad-input-exact-value]
+    background: rgba(0, 0, 0, .025)
+    font-size: 28px
+
+    &:active
+      background: #e5e5ee

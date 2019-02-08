@@ -1,0 +1,8 @@
+- content_for(:title) { "Alle producten" }
+
+= form_tag spina_pos.search_products_path, class: 'product-search', data: {remote: true} do
+  = search_field_tag :search, nil, placeholder: "Zoeken"
+
+.product-overview= render partial: 'product', collection: @products
+
+-#.product-pagination= paginate(@products)

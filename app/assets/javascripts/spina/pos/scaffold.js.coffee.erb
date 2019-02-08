@@ -1,0 +1,113 @@
+ready = ->
+  FastClick.attach(document.body)
+
+  window.soundScanner = "Scanner"
+  window.soundError = "Error"
+  createjs.Sound.registerSound("<%= asset_path('spina/pos/scanSound.mp3') %>", window.soundScanner)
+  createjs.Sound.registerSound("<%= asset_path('spina/pos/errorSound.mp3') %>", window.soundError)
+
+  if $('#siriwave').length
+    siriwave = new SiriWave({
+      container: document.getElementById('siriwave'),
+      cover: true,
+      color: '#fff'
+      speed: 0.04,
+      amplitude: 0.2,
+      frequency: 4
+    })
+    siriwave.start()
+
+    $('input[type="text"]').scannerDetection (value) ->
+      $('input[type="text"]').val("")
+      siriwave.setAmplitude(1)
+      $.get('/pos/orders/scanned', {scan: value}, ->
+        siriwave.setAmplitude(0.2)
+      )
+
+  $('.product-pagination').infiniteScroll()
+  $('.order-pagination').infiniteScroll()
+
+  webkit.messageHandlers.spina.postMessage("refresh") unless typeof webkit is 'undefined'
+
+  if $('#pos_printer_form').length
+    value = $('#pos_printer_form input[type="text"]').val()
+    printer = new Spina.PosPrinter(value)
+    printer.getStatus (status) ->
+      if status.status == 'ok'
+        $('#pos_printer_form .form-input-message').text("Gereed")
+        $('#pos_printer_form .form-input-message').addClass('form-input-message-success').removeClass('form-input-message-error')
+      else
+        $('#pos_printer_form .form-input-message').text(status.message)
+        $('#pos_printer_form .form-input-message').removeClass('form-input-message-success').addClass('form-input-message-error')
+
+$(document).on 'touchstart', '.checkout-payment-methods a', (e) ->
+  $(this).addClass('active')
+  $(this).siblings().removeClass('active')
+
+  value = $(this).attr('data-payment-method')
+  $(this).parent().find('input').val(value)
+
+  $('.checkout-done').show()
+
+$(document).on 'click', '.checkout-payment-methods a', (e) ->
+  e.preventDefault()
+
+$(document).on 'change', '.cart-order-item-container select', (e) ->
+  $cartOrderItem = $(this).parents('.cart-order-item')
+
+  newPrice = $cartOrderItem.attr('data-order-item-price') * $(this).val()
+  $cartOrderItem.find('.order-item-price').text("€#{newPrice.toLocaleString('nl-NL', {minimumFractionDigits: 2})}")
+
+  stock_level = parseInt($cartOrderItem.attr('data-stock-level'))
+  if $(this).val() > stock_level
+    $cartOrderItem.find('.not-in-stock-message').show()
+  else
+    $cartOrderItem.find('.not-in-stock-message').hide()
+
+  $form = $(this).closest('form')
+  $form.submit()
+
+$(document).on 'click', '.delete-item', (e) ->
+  $item = $(this).parent()
+  path = $(this).attr('data-delete-path')
+
+  $item.addClass('deleted')
+  setTimeout ->
+    $item.addClass('slideUp')
+    setTimeout ->
+      $item.remove()
+    , 300
+  , 300
+
+  $.ajax
+    url: path,
+    type: 'DELETE'
+
+  e.preventDefault()
+
+window.startEditingForm = ->
+  $('.cart-order-item').addClass('editing')
+
+window.doneEditingForm = ->
+  $('.cart-order-item').removeClass('editing')
+
+$(document).on 'turbolinks:load', ready
+
+$(document).on 'click', '#start_scanning', (e) ->
+  e.preventDefault()
+  $('input[type="text"]').focus()
+
+$(document).on 'focus', 'input[type="text"]', (e) ->
+  $('#start_scanning').hide()
+  $('.siriwave').show()
+
+$(document).on 'blur', 'input[type="text"]', (e) ->
+  $('#start_scanning').show()
+  $('.siriwave').hide()
+
+$(document).on 'click', '.cart-order-item', (e) ->
+  $('input[type="text"]').blur()
+
+$(document).on 'blur, change', '#pos_printer_form input', (e) ->
+  $form = $(this).closest('form')
+  $form.submit()

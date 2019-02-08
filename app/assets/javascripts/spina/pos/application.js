@@ -1,0 +1,16 @@
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require spina/pos/fastclick
+//= require spina/pos/jquery.scannerdetection
+//= require spina/pos/siriwave
+//= require spina/pos/starbarcodeencoder
+//= require spina/pos/starwebprintbuilder
+//= require spina/pos/starwebprintextmanager
+//= require spina/pos/starwebprinttrader
+//= require spina/pos/numeral
+//= require spina/pos/soundjs
+//= require ./app.infinitescroll
+//= require ./spina.posprinter
+//= require ./cash_keypad
+//= require ./scaffold

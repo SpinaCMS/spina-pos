@@ -1,0 +1,141 @@
+// Product overview
+
+.product-overview
+  overflow-x: hidden
+  width: 100%
+  @include display(flex)
+  @include flex-flow(row wrap)
+  @include flex-wrap(wrap)
+
+.product
+  background: #fff
+  border-left: 1px solid #eee
+  border-bottom: 1px solid #eee
+  display: flex
+  flex-direction: column
+  margin-left: -1px
+  position: relative
+  text-align: center
+  @include flex(1)
+  @include flex-basis(160px)
+
+  a
+    // background: #fff
+    color: #333
+    display: flex
+    flex: 1
+    flex-direction: column
+    outline: none
+    text-decoration: none
+    padding: 20px
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+    img
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+    &:active
+      background: #f5f5fa
+
+  .button
+    background: #f5f5fa
+    border: 1px solid shade(#f5f5fa, 5%)
+    border-radius: 5px
+    color: #6768b2
+    line-height: rem(32)
+    margin-top: 20px
+    width: auto
+
+    &:active
+      background: tint(#f5f5fa, 50%)
+      color: tint(#6768b2, 20%)
+
+    strong
+      font-size: rem(30)
+
+.product-name
+  display: flex
+  flex-direction: column
+  flex: 1
+  font-weight: 600
+  margin: 12px 0
+
+  small
+    font-weight: 400
+
+.product-details
+  color: #666
+  font-size: rem(14)
+  font-weight: normal
+  margin-top: 3px
+  text-align: center
+
+.product-price
+  font-weight: 600
+
+.product-image
+  height: 150px
+  margin: 0 auto
+  width: 100px
+  @include display(flex)
+  @include justify-content(center)
+
+  img
+    display: block
+
+// Search
+
+.product-search
+  background: shade(#f5f5fa, 10%)
+  padding: 10px
+  top: 0px
+  @include display(flex)
+
+  input
+    border: none
+    border-radius: 5px
+    display: block
+    height: 36px
+    -webkit-appearance: none
+    padding: 0 12px
+    text-align: center
+    -webkit-appearance: none
+    @include flex(1)
+
+    &:focus
+      text-align: left
+
+.product-show
+  padding: 20px
+  @include display(flex)
+
+  .product-description
+    line-height: rem(24)
+    @include flex(2)
+
+    table
+      margin: 20px 0
+
+      th
+        text-align: left
+        text-transform: capitalize
+        padding-right: 20px
+
+  .product-image
+    background: #fff
+    border: 1px solid #eee
+    border-radius: 5px
+    margin-right: 20px
+    padding: 20px
+    @include flex(1)
+    @include align-self(flex-start)
+
+    img
+      display: block
+      max-width: 100%
+      @include align-self(flex-start)
+
+  .product-purchase
+    margin-top: 20px
+
+.product-pagination
+  opacity: 0

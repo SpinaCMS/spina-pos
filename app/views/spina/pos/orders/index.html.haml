@@ -1,0 +1,7 @@
+- content_for(:title) { "Vorige bestellingen" }
+
+%nav.list.order-overview
+  %ul
+    = render partial: 'order', collection: @orders
+
+.order-pagination= link_to_next_page @orders, '', data: {remote: true}

@@ -1,0 +1,8 @@
+.product
+  = link_to product do
+    .product-image
+      = image_tag image_variant(product.product_images.first, resize: '100x150')
+    .product-name
+      = product.name
+
+    .product-price= number_to_currency(product.price)

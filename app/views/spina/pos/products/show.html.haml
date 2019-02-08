@@ -1,0 +1,26 @@
+- content_for(:title) { @product.name }
+
+.product-show
+  .product-image
+    = image_tag image_variant(@product.product_images.first, resize: '500x500')
+
+  .product-description
+    = @product.description
+
+    .product-purchase
+      = link_to 'In winkelmand', add_product_orders_path(product_id: @product.id), class: 'button button-block', data: {remote: true, method: :post}
+
+    %table
+      %tr
+        %th Voorraad
+        %td= @product.stock_level
+        
+      %tr
+        %th Locatie
+        %td= @product.location
+
+      - if @product.properties.present? && @product.properties != "{}"
+        - @product.properties.each do |property|
+          %tr
+            %th= property[0]
+            %td= property[1]

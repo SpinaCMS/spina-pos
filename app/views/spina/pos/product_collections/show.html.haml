@@ -1,0 +1,5 @@
+- content_for(:title) { @product_collection.name }
+
+.product-overview= render partial: 'spina/pos/products/product', collection: @products
+
+.product-pagination= link_to_next_page @products, '', data: {remote: true}

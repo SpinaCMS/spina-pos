@@ -1,0 +1,24 @@
+- content_for(:title) { "Afrekenen" }
+
+= form_for @order, url: checkout_index_path, data: {method: :patch, remote: true} do |f|
+  .checkout
+    .checkout-container
+      .checkout-label Te betalen
+      .checkout-total= number_to_currency current_order.to_be_paid
+    
+      .text-muted{style: 'margin-top: 4px'}
+        =t 'spina.order_items', count: @order.order_items.sum(:quantity)
+
+    .checkout-container
+      .checkout-label Betaalwijze
+      .checkout-payment-methods
+        = f.hidden_field :payment_method
+        = link_to '#', data: {payment_method: 'cash'} do
+          %i.icon.icon-cash
+          %label Contant
+
+        = link_to '#', data: {payment_method: 'pin'} do
+          %i.icon.icon-pin
+          %label Pinbetaling
+
+    = f.submit 'Betaling registreren', class: 'checkout-done'

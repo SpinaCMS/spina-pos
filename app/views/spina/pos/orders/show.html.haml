@@ -1,0 +1,49 @@
+- content_for(:title) { @order.number }
+= link_to 'Print bon', print_settings_order_path(@order), class: 'print-order-button', style: 'display: none', data: {remote: true, disable_with: 'Printing...'}
+
+.order-list{style: 'padding: 20px'}
+  - @order.order_items.each do |order_item|
+    .order-list-item
+      .pull-right= number_to_currency order_item.total
+      = order_item.quantity
+      &times;
+      = order_item.description
+
+  %br/
+  %br/
+  %strong Subtotaal
+  .pull-right= number_to_currency @order.order_total
+
+  - @order.tax_amount_by_rates.each do |rate|
+    %br/
+    %strong= "#{number_to_human(rate[0])}% btw"
+    .pull-right= number_to_currency(rate[1][:tax_amount])
+
+  %br/
+  %strong Totaal:
+  .pull-right= number_to_currency @order.total
+
+  - if @order.gift_card.present?
+    %br/
+    %br/
+    %strong Giftcard:
+    .pull-right
+      –
+      = number_to_currency @order.gift_card_amount
+
+  %br/
+  %br/
+  %strong Te betalen:
+  - if @order.payment_method == 'cash'
+    .pull-right= number_to_currency @order.to_be_paid_round
+  - else
+    .pull-right= number_to_currency @order.to_be_paid
+
+  %br/
+  %br/
+  %strong Betaalwijze:
+  .pull-right= @order.payment_method
+
+  %br/
+  %strong Datum en tijd:
+  .pull-right=l @order.received_at, format: '%d %B %Y - %H:%M'

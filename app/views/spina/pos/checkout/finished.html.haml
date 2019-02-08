@@ -1,0 +1,12 @@
+- content_for(:title) { "Bestelling afgerond" }
+
+.checkout
+  .checkout-container
+    = image_tag 'spina/pos/printer.png', style: 'margin: 20px 0', width: 73, height: 74
+
+    - if @change.present?
+      .checkout-label Wisselgeld
+      .checkout-total= number_to_currency @change
+
+  .checkout-subtext
+    bonnetje wordt automatisch geprint

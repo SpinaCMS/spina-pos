@@ -1,0 +1,10 @@
+- content_for(:title) { "Dag openen" }
+
+= form_for @shift, url: settings_shifts_path(@shift), html: {style: 'padding-top: 24px'}, data: {remote: true} do |f|
+  = f.label :opening_balance, class: 'form-label'
+
+  .form-group
+    = f.text_field :opening_balance, value: number_with_precision(f.object.opening_balance, precision: 2), class: 'form-control'
+    .form-input-message.text-muted= number_to_currency @opening_balance
+
+  = f.submit "Save", {style: 'visibility: hidden'}

@@ -1,0 +1,83 @@
+.checkout
+  text-align: center
+
+  .checkout-container
+    margin: 40px 0
+
+  .checkout-label
+    color: #666
+    font-size: rem(14)
+    letter-spacing: 1px
+    line-height: rem(20)
+    text-transform: uppercase
+
+  .checkout-total
+    color: #333
+    font-size: rem(36)
+    font-weight: 500
+
+  .checkout-payment-methods
+    background: #fff
+    border: 1px solid #eee
+    border-radius: 5px
+    overflow: hidden
+    margin: 20px 40px
+    @include display(flex)
+
+    a
+      color: #333
+      padding: 30px 0 40px 0
+      text-decoration: none
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+      @include flex(1)
+
+      &.active
+        background: #6768b2
+        color: #fff
+
+      &:first-child
+        border-right: 1px solid #f1f1f1
+
+      .icon
+        font-size: 60px
+
+      label
+        display: block
+        font-size: 14px
+        font-weight: 500
+
+  .checkout-done
+    background: none
+    border: none
+    bottom: 0px
+    color: #6768b2
+    display: none
+    left: 0px
+    font-size: 20px
+    padding: 40px 0
+    position: fixed
+    width: 100%
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+    &:active
+      opacity: .6
+
+  .checkout-finish
+    background: none
+    border: none
+    color: #6768b2
+    font-size: 20px
+    padding: 12px 0
+    width: 100%
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+    &:active
+      opacity: .6
+
+  .checkout-subtext
+    bottom: 20px
+    color: #999
+    font-size: 14px
+    left: 0px
+    position: fixed
+    width: 100%

@@ -1,0 +1,17 @@
+%li 
+  = link_to settings_order_path(order) do
+    .pull-right{style: 'text-align: right'}
+      = number_to_currency order.total
+      %br/
+      %small.text-muted
+        - if order.order_items.sum(:quantity) == 1
+          1 product
+        - else
+          = order.order_items.sum(:quantity)
+          producten
+    %strong=l order.received_at, format: '%H:%M'
+    %br/
+    %small.text-muted
+      =l order.received_at, format: '%d %B'
+      –
+      = order.number

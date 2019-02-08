@@ -1,0 +1,101 @@
+$font-icons: 'icons_mrhop'
+$purple: #6768b2
+
+@import bourbon
+@import neat
+@import spina/normalize
+@import products
+@import shopping_cart
+@import login
+@import checkout
+@import forms
+@import cash_keypad
+@import siri
+
+// @import ./default/icons
+// @import ./default/icons_mrhop
+
+body
+  background: #f5f5fa
+  font-family: -apple-system
+
+body[data-controller-name="orders"][data-action-name="new"]
+  background: #6768b2
+
+// Button
+
+.button
+  background: $purple
+  border-radius: 3px
+  color: #fff
+  display: inline-block
+  font-size: rem(18)
+  font-weight: 600
+  line-height: rem(44)
+  padding: 0 24px
+  text-align: center
+  text-decoration: none
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+  &:active
+    background: tint(#6768b2, 15%)
+
+.button.button-link
+  background: none
+  color: $purple
+  font-size: rem(17)
+  font-weight: normal
+  transition: opacity .2s ease
+
+  &:active
+    opacity: .5
+    transition: none
+
+.button-red
+  background: red
+
+.button-block
+  display: block
+  width: 100%
+
+// Navigation list
+nav.list
+  ul
+    margin: 0
+    padding: 0
+
+  ul li
+    list-style: none
+
+  ul li a
+    background: #fff
+    border-bottom: 1px solid #eee
+    color: #333
+    display: block
+    font-size: rem(17)
+    font-weight: 400
+    padding: 16px 20px
+    text-decoration: none
+    transition: background .2s ease
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+    strong
+      font-weight: 500
+
+    &:active
+      background: #f9f9f9
+      transition: none
+
+    img
+      margin-right: 10px
+      vertical-align: middle
+
+// Misc
+.text-center
+  text-align: center
+
+.pull-right
+  float: right
+
+.text-muted
+  color: #999
