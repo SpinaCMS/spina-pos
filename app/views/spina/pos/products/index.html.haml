@@ -5,4 +5,4 @@
 
 .product-overview= render partial: 'product', collection: @products
 
--#.product-pagination= paginate(@products)
+.product-pagination= link_to_next_page @products, '', data: {remote: true}
