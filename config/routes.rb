@@ -1,3 +1,13 @@
+Spina::Engine.routes.draw do
+  namespace :shop, path: '' do
+    namespace :admin, path: Spina.config.backend_path do
+      scope '/shop' do
+        resources :shifts, only: [:index, :show]
+      end
+    end
+  end
+end
+
 Spina::Pos::Engine.routes.draw do
   get :login, to: 'sessions#new'
   post :login, to: 'sessions#create', as: 'post_login'

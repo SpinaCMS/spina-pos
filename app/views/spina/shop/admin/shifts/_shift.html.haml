@@ -1,0 +1,29 @@
+%tr
+  %td.nowrap=l shift.start_datetime, format: '%d-%m'
+  %td
+    =l shift.start_datetime, format: '%H:%M uur'
+    %small
+      - if shift.closed?
+        tot
+        - if shift.end_datetime.to_date == shift.start_datetime.to_date
+          =l shift.end_datetime, format: '%H:%M uur'
+        - else
+          =l shift.end_datetime, format: '%d-%m – %H:%M uur'
+  %td.text-right= shift.user.try(:name)
+  %td.text-right= number_to_currency shift.opening_balance
+  %td.text-right
+    - if shift.closed?
+      = number_to_currency shift.cash_counted
+      %small
+        = number_to_currency shift.cash_expected
+        verwacht
+  %td.text-right
+    - if shift.closed?
+      - if shift.cash_difference > BigDecimal.new("7.5")
+        .text-danger= number_to_currency shift.cash_difference
+      - elsif shift.cash_difference < BigDecimal.new("-7.5")
+        .text-danger= number_to_currency shift.cash_difference
+      - else
+        = number_to_currency shift.cash_difference
+  %td.text-right= number_to_currency shift.cash_left if shift.closed?
+  %td.text-muted{style: 'max-width: 200px'}= shift.note

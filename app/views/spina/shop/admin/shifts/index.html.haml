@@ -1,0 +1,16 @@
+%header#header
+  .breadcrumbs
+    = render_breadcrumbs separator: '<div class="divider"></div>'
+
+.table-container.infinite-table
+  %table.table.table-clickable
+    %thead
+      %tr
+        %th{colspan: 3}
+        %th.text-right= Spina::Pos::Shift.human_attribute_name(:opening_balance)
+        %th.text-right= Spina::Pos::Shift.human_attribute_name(:closing_balance)
+        %th.text-right= Spina::Pos::Shift.human_attribute_name(:cash_difference)
+        %th.text-right= Spina::Pos::Shift.human_attribute_name(:cash_left)
+
+    %tbody
+      = render partial: 'shift', collection: @shifts

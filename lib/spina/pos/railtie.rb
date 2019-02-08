@@ -2,13 +2,6 @@ module Spina
   module Pos
     class Railtie < Rails::Railtie
 
-      initializer "spina_shop.register_plugin" do
-        Spina::Plugin.register do |plugin|
-          plugin.name = "Kassa"
-          plugin.namespace = "pos"
-        end
-      end
-
       initializer "spina_pos.assets.precompile" do |app|
         app.config.assets.precompile += %w(
           spina/pos/scannen.png 
