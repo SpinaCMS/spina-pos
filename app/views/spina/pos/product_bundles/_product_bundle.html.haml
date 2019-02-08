@@ -1,5 +1,5 @@
 .product
-  = link_to [:pos, product_bundle] do
+  = link_to product_bundle do
     .product-image
       = image_tag image_variant(product_bundle.product_images.first, resize: '100x150')
     .product-name

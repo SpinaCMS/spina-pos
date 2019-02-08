@@ -17,7 +17,7 @@ module Spina
         helper_method :pos_preferences
 
         def pos_customer
-          @pos_customer ||= Shop::Customer.where(first_name: 'POS', last_name: 'Mr. Hop', email: 'info@mrhop.nl', country: Spina::Shop::Country.first).first_or_create
+          @pos_customer ||= Shop::Customer.where(first_name: 'POS', last_name: 'SmokeSmarter', email: 'info@smokesmarter.nl', country: Shop::Country.find_by(code: "NL")).first_or_create
         end
         helper_method :pos_customer
 
@@ -31,7 +31,7 @@ module Spina
             if has_order?
               @current_order
             else
-              order = Shop::Order.where(store: Spina::Shop::Store.find_by(name: "SmokeSmarter"), customer: pos_customer, user_id: current_user.id, received_at: nil, pos: true, billing_country: Shop::Country.find_by(code: "NL"), prices_include_tax: true).order(created_at: :desc).first_or_create
+              order = Shop::Order.where(store: Shop::Store.find_by(name: "SmokeSmarter"), customer: pos_customer, user_id: current_user.id, received_at: nil, pos: true, billing_country: Shop::Country.find_by(code: "NL"), prices_include_tax: true).order(created_at: :desc).first_or_create
               session[:order_id] = order.id
               order
             end
@@ -40,7 +40,7 @@ module Spina
         helper_method :current_order
 
         def has_order?
-          session[:order_id] && @current_order = Shop::Order.find_by_id(session[:order_id])
+          session[:order_id] && @current_order = Shop::Order.where(pos: true).find_by_id(session[:order_id])
         end
         helper_method :has_order?
 

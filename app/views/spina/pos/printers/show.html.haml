@@ -1,6 +1,6 @@
 - content_for(:title) { "Bonprinter" }
 
-= form_for pos_preferences, url: pos_settings_printer_path, html: {id: 'pos_printer_form', style: 'padding-top: 24px'}, data: {method: :patch, remote: true} do |f|
+= form_for pos_preferences, url: settings_printer_path, html: {id: 'pos_printer_form', style: 'padding-top: 24px'}, data: {method: :patch, remote: true} do |f|
   = f.label :printer_ip, class: 'form-label'
 
   .form-group

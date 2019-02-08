@@ -8,5 +8,5 @@
     = @product_bundle.name
 
     .product-purchase
-      = link_to 'In winkelmand', add_product_bundle_pos_orders_path(product_bundle_id: @product_bundle.id), class: 'button button-block', data: {remote: true, method: :post}
+      = link_to 'In winkelmand', add_product_bundle_orders_path(product_bundle_id: @product_bundle.id), class: 'button button-block', data: {remote: true, method: :post}
 

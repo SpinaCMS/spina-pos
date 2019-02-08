@@ -5,10 +5,15 @@
     = image_tag image_variant(@product.product_images.first, resize: '500x500')
 
   .product-description
-    = @product.description
+    != @product.description
 
     .product-purchase
-      = link_to 'In winkelmand', add_product_orders_path(product_id: @product.id), class: 'button button-block', data: {remote: true, method: :post}
+      - if @product.purchasable?
+        = link_to 'In winkelmand', add_product_orders_path(product_id: @product.id), class: 'button button-block', data: {remote: true, method: :post}
+
+      - @product.variants.each do |variant|
+        = link_to variant.variant_name, add_product_orders_path(product_id: variant.id), class: 'button button-block', data: {remote: true, method: :post}
+        %br/
 
     %table
       %tr

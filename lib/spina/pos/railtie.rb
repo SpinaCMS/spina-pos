@@ -19,6 +19,7 @@ module Spina
           spina/pos/printer@2x.png 
           spina/pos/delete@2x.png 
           spina/pos/printer.png
+          spina/pos/pin@2x.png
         )
       end
 

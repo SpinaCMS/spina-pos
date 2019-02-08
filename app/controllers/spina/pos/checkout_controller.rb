@@ -34,6 +34,10 @@ module Spina
           render :not_confirmed
         end
       rescue Exception => e
+        Rails.logger.info @order.pos.inspect
+        Rails.logger.info @order.everything_valid?.inspect
+        Rails.logger.info @order.order_items.any?.inspect
+        Rails.logger.info @order.errors.full_messages
         Rails.logger.info e
         render :not_confirmed
       ensure

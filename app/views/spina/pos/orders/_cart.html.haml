@@ -13,6 +13,8 @@
           .select-container
             = ff.select :quantity, options_for_select((1..99).map{|i| ["#{i} &times;".html_safe, i]}, ff.object.quantity)
           = ff.object.description
+          - if ff.object.is_product? && ff.object.orderable.variant?
+            = ff.object.orderable.variant_name
           - if !ff.object.is_product_bundle? && ff.object.orderable.stock_enabled?
             %div.not-in-stock-message{style: ('display: none' if ff.object.orderable.stock_level >= ff.object.quantity)} 
               #{ff.object.orderable.stock_level} op voorraad
@@ -28,11 +30,11 @@
           = number_to_currency @order.gift_card_amount
         Cadeaubon
         = number_to_currency @order.gift_card.value
-      = link_to '#', class: 'delete-item', data: {delete_path: remove_gift_card_pos_orders_path} do
+      = link_to '#', class: 'delete-item', data: {delete_path: remove_gift_card_orders_path} do
         = image_tag 'spina/pos/delete-pos.png', width: 24, height: 24
 
   - if @order.discount.present?
     .cart-order-item-container
       .cart-order-item= @order.discount.description
-      = link_to '#', class: 'delete-item', data: {delete_path: remove_discount_pos_orders_path} do
+      = link_to '#', class: 'delete-item', data: {delete_path: remove_discount_orders_path} do
         = image_tag 'spina/pos/delete-pos.png', width: 24, height: 24

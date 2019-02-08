@@ -43,7 +43,7 @@ class Spina.PosPrinter
 
   print: (options = {}) ->
     image = new Image()
-    image.src = "/mrhop.svg"
+    image.src = "/receipt-logo.svg"
     image.onload = =>
       # Logo!
       this.renderLogo(image)
@@ -114,9 +114,9 @@ class Spina.PosPrinter
     @request += @builder.createBitImageElement({context: context, x: 0, y: 0, width: canvas.width, height: canvas.height})
 
   renderHeader: ->
-    this.renderLineCenter('Mr. Hop', true)
-    this.renderLineCenter('Raadhuisstraat 36A')
-    this.renderLineCenter('5801 MA, Venray')
+    this.renderLineCenter('SmokeSmarter', true)
+    this.renderLineCenter('Keizersveld 25B')
+    this.renderLineCenter('5803 AM, Venray')
     this.renderBreak()
     this.renderBreak()
 
@@ -146,10 +146,10 @@ class Spina.PosPrinter
   renderFooter: ->
     this.renderBreak()
     this.renderBreak()
-    this.renderLineCenter('Koop mijn bieren ook online op')
-    this.renderLineCenter('www.misterhop.com', true, 2)
+    this.renderLineCenter('Koop onze producten ook online op')
+    this.renderLineCenter('www.smokesmarter.nl', true, 2)
     this.renderBreak()
-    this.renderLineCenter('Hop je later!')
+    this.renderLineCenter('Smoke je later!')
 
   renderHorizontalLine: (thickness = 'medium') ->
     @request += @builder.createRuledLineElement({thickness: (thickness)})

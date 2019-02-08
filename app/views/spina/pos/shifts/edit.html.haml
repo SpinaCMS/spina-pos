@@ -1,6 +1,6 @@
 - content_for(:title) { "Dag sluiten" }
 
-= form_for @shift, url: pos_settings_shift_path(@shift), html: {style: 'padding-top: 24px'}, data: {remote: true} do |f|
+= form_for @shift, url: settings_shift_path(@shift), html: {style: 'padding-top: 24px'}, data: {remote: true} do |f|
   = f.label :cash_counted, class: 'form-label'
   .form-group{style: "margin-bottom: 20px"}
     = f.text_field :cash_counted, value: nil, placeholder: number_with_precision(f.object.cash_counted, precision: 2), class: 'form-control'

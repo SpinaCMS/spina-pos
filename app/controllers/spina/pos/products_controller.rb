@@ -12,7 +12,7 @@ module Spina
       end
 
       def search
-        @products = Shop::Product.where(archived: false).includes(:product_images).page(params[:page]).per(20)
+        @products = Shop::Product.active.roots.includes(:product_images).page(params[:page]).per(20)
         @products = @products.search(params[:search]) if params[:search].present?
       end
 
