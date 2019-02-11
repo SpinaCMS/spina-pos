@@ -8,7 +8,11 @@ Rails.application.config.to_prepare do
       begin
         @template.spina_pos.url_for arguments
       rescue
-        @template.main_app.url_for arguments
+        begin 
+          @template.spina.url_for arguments
+        rescue
+          @template.main_app.url_for arguments
+        end
       end
     end
   end
