@@ -148,8 +148,6 @@ class Spina.PosPrinter
     this.renderBreak()
     this.renderLineCenter('Koop onze producten ook online op')
     this.renderLineCenter('www.smokesmarter.nl', true, 2)
-    this.renderBreak()
-    this.renderLineCenter('Smoke je later!')
 
   renderHorizontalLine: (thickness = 'medium') ->
     @request += @builder.createRuledLineElement({thickness: (thickness)})
