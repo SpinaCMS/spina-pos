@@ -12,7 +12,7 @@ module Spina
       private
 
         def pos_preferences_params
-          params.require(:pos_preferences).permit(:printer_ip)
+          params.require(:preferences).permit(:printer_ip)
         end
 
     end
