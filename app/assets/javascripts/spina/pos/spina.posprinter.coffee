@@ -2,7 +2,7 @@ window.Spina = {}
 
 class Spina.PosPrinter
 
-  constructor: (ip, current_user = '', ssl = false) ->
+  constructor: (ip, current_user = '', ssl = true) ->
     if ssl
       @url = "https://#{ip}:443/StarWebPRNT"
     else
