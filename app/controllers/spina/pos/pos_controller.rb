@@ -17,7 +17,7 @@ module Spina
         helper_method :pos_preferences
 
         def pos_customer
-          @pos_customer ||= Shop::Customer.where(first_name: 'POS', last_name: 'SmokeSmarter', email: 'info@smokesmarter.nl', country: Shop::Country.find_by(code: "NL")).first_or_create
+          @pos_customer ||= Shop::Customer.where(first_name: 'POS', last_name: 'SmokeSmarter', email: 'info@smokesmarter.nl', store: Shop::Store.find_by(name: "SmokeSmarter"), country: Shop::Country.find_by(code: "NL")).first_or_create
         end
         helper_method :pos_customer
 
