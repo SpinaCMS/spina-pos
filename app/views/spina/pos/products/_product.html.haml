@@ -1,7 +1,8 @@
 .product
   = link_to product do
     .product-image
-      = image_tag image_variant(product.product_images.first, resize: '200x300')
+      - image = product.product_images.first || product.children.joins(:product_images).first&.product_images&.first || product.root.product_images.first
+      = image_tag image_variant(image, resize: '200x300')
     .product-name
       = product.name
 
