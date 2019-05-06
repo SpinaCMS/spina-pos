@@ -7,7 +7,13 @@
 
   = label_tag :gift_card, 'Code', class: 'form-label'
 
-  .form-group
-    .form-input-message.form-input-message-error
-    = text_field_tag :gift_card, @order.gift_card.try(:readable_code), class: 'form-control', placeholder: "XXXX - XXXX"
+  - @order.gift_cards.each do |gift_card|
+    .form-group
+      .form-input-message.form-input-message-error
+      = text_field_tag "gift_cards[]", gift_card.readable_code, class: 'form-control', placeholder: "XXXX - XXXX"
+
+  - 3.times do
+    .form-group
+      .form-input-message.form-input-message-error
+      = text_field_tag "gift_cards[]", nil, class: 'form-control', placeholder: "XXXX - XXXX"
 

@@ -10,7 +10,7 @@ var printer = new Spina.PosPrinter("<%= pos_preferences.printer_ip %>", "<%= cur
 
 printer.setTotals("<%= number_to_currency(@order.order_total) %>", "<%= number_to_currency(@order.total) %>");
 
-<% if @order.gift_card.present? %>
+<% if @order.gift_cards.any? %>
   printer.addGiftCard("<%= number_to_currency(@order.gift_card_amount) %>", "<%= number_to_currency(@order.to_be_paid) %>")
 <% end %>
 

@@ -22,14 +22,13 @@
         = link_to '#', class: 'delete-item', data: {delete_path: order_order_item_path(@order.id, ff.object.id)} do
           = image_tag 'spina/pos/delete-pos.png', width: 24, height: 24
 
-  - if @order.gift_card.present?
+  - if @order.gift_cards.any?
     .cart-order-item-container
       .cart-order-item
         %span.order-item-price{style: 'float: right'}
           \-
           = number_to_currency @order.gift_card_amount
-        Cadeaubon
-        = number_to_currency @order.gift_card.value
+        Cadeaubonnen
       = link_to '#', class: 'delete-item', data: {delete_path: remove_gift_card_orders_path} do
         = image_tag 'spina/pos/delete-pos.png', width: 24, height: 24
 

@@ -8,7 +8,7 @@ var printer = new Spina.PosPrinter("<%= pos_preferences.printer_ip %>", "<%= cur
   printer.addTaxLine("<%= number_to_human(rate[0]) %>", "<%= number_to_currency(rate[1][:tax_amount]) %>");
 <% end %>
 
-<% if @order.gift_card.present? %>
+<% if @order.gift_cards.any? %>
   printer.addGiftCard("<%= number_to_currency(@order.gift_card_amount) %>", "<%= number_to_currency(@order.to_be_paid) %>")
 <% end %>
 

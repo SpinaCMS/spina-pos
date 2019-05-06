@@ -23,7 +23,7 @@
   %strong Totaal:
   .pull-right= number_to_currency @order.total
 
-  - if @order.gift_card.present?
+  - if @order.gift_cards.any?
     %br/
     %br/
     %strong Giftcard:

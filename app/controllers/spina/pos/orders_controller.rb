@@ -65,22 +65,24 @@ module Spina
       end
 
       def add_gift_card
-        # Raise order not building anymore if not building!
-        code = params[:gift_card].gsub(/\s|-/, "")
-        gift_card = Shop::GiftCard.available.where(code: code).first
+        current_order.gift_cards = []
 
-        if gift_card.present? && current_order.building?
-          current_order.gift_card = gift_card
-          current_order.save
-        else
-          render :failed_to_add_gift_card
+        params[:gift_cards].map(&:presence).compact.each do |code|
+          code = code.gsub(/\s|-/, "")
+
+          gift_card = Shop::GiftCard.available.where(code: code).first
+
+          if gift_card.present? && current_order.building?
+            current_order.gift_cards << gift_card unless current_order.gift_cards.include?(gift_card)
+            current_order.save
+          end
         end
       end
 
       def remove_gift_card
         # Raise order not building anymore if not building!
         if current_order.building?
-          current_order.gift_card = nil
+          current_order.gift_cards = []
           current_order.save
         end
       end
