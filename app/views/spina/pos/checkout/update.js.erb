@@ -1,5 +1,6 @@
 <% if @order.payment_method == 'cash' %>
   Turbolinks.visit("<%= cash_payment_checkout_index_path %>");
 <% else %>
+  webkit.messageHandlers.spina.postMessage({message: "smartpin", id: "<%= @order.id %>", amount: "<%=j (@order.to_be_paid * 100).to_i.to_s %>", reference: "Bestelling <%= @order.number %>"})
   Turbolinks.visit("<%= pin_payment_checkout_index_path %>");
 <% end %>

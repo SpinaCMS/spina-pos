@@ -4,7 +4,7 @@
   .checkout-container
     = image_tag 'spina/pos/pin@2x.png', style: 'margin: 20px 0', width: 92, height: 65
 
-    .checkout-label Stel nu de pinautomaat in
+    .checkout-label Betaling via Rabo SmartPin
     .checkout-total= number_to_currency @order.to_be_paid
   
 = form_tag confirm_checkout_index_path, id: 'checkout_payment_form', data: {remote: true} do
