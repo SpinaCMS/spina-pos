@@ -9,5 +9,5 @@
       .checkout-total= number_to_currency @change
 
   .checkout-container
-    = link_to print_settings_order_path(@order), class: 'button', data: {remote: true, disable_with: 'Printing...'} do
+    = link_to print_settings_order_path(params[:order_id]), class: 'button', data: {remote: true, disable_with: 'Printing...'} do
       Print bon

@@ -4,4 +4,4 @@
 <% end %>
 
 webkit.messageHandlers.spina.postMessage("finished");
-Turbolinks.visit("<%= finished_checkout_index_path(change: @change) %>");
+Turbolinks.visit("<%= finished_checkout_index_path(change: @change, order_id: @order.id) %>");
