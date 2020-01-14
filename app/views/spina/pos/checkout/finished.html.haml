@@ -8,5 +8,6 @@
       .checkout-label Wisselgeld
       .checkout-total= number_to_currency @change
 
-  .checkout-subtext
-    bonnetje wordt automatisch geprint
+  .checkout-container
+    = link_to print_settings_order_path(@order), class: 'button', data: {remote: true, disable_with: 'Printing...'} do
+      Print bon

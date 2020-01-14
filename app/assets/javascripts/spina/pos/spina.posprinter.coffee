@@ -41,6 +41,10 @@ class Spina.PosPrinter
     trader = new StarWebPrintTrader({url: "#{@url}/SendMessage", papertype: "", blackmark_sensor: "front_side"})
     trader.sendMessage({request: @request})
 
+  openDrawerInstantly: ->
+    this.openDrawer()
+    this.sendMessage()
+
   print: (options = {}) ->
     image = new Image()
     image.src = "/receipt-logo.svg"
