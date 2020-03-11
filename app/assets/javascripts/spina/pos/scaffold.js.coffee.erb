@@ -52,6 +52,14 @@ $(document).on 'touchstart', '.checkout-payment-methods a', (e) ->
 $(document).on 'click', '.checkout-payment-methods a', (e) ->
   e.preventDefault()
 
+$(document).on 'click', '#smartpin', (e) ->
+  order_id = $('#smartpin').attr('data-order-id')
+  amount = $('#smartpin').attr('data-amount')
+  reference = $('#smartpin').attr('data-reference')
+
+  # Send to Smartpin
+  webkit.messageHandlers.spina.postMessage({message: "smartpin", id: order_id, amount: amount, reference: reference})
+
 $(document).on 'change', '.cart-order-item-container select', (e) ->
   $cartOrderItem = $(this).parents('.cart-order-item')
 
